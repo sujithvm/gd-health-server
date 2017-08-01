@@ -13,6 +13,7 @@ try {
 }
 
 require('./models/UserSchema');
+require('./models/ItemSchema');
 
 
 var index = require('./routes/index');
@@ -36,6 +37,7 @@ app.use('/', index);
 app.use('/users', users);
 
 app.use('/signup',  require('./routes/signup'));
+app.use('/items',  require('./routes/items'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
