@@ -22,17 +22,20 @@ router.post('/', function (req, res) {
 
                 if (req.body.item_type == "fitbit" && req.body.calories) {
 
-                    var item = new Item(req.body);
-                    item.save()
+                    var obj = new Object()
+                    obj.event_type = req.body.item_type;
+                    obj.event_calories = req.body.calories;
+                    obj.event_time = Date.now()
 
-                    console.log(item);
-                    user.items.push(item);
-                    user.total_calories -= item.calories;
+                    console.log(obj)
+
+                    user.user_events.push(obj);
+                    user.total_calories -= obj.event_calories;
                     user.save();
 
                     return res.json({
                         err: false,
-                        message: 'Fitbit Item successfully added to user ' + user.first + " " + user.last_name
+                        message: 'Fitbit Item successfully added to user ' + user.first_name + " " + user.last_name
                     });
 
                 } else {
@@ -54,7 +57,13 @@ router.post('/', function (req, res) {
 
                             user.total_calories += item.calories;
 
-                            user.items.push(item);
+                            var obj = new Object()
+                            obj.event_type = item.item_type;
+                            obj.event_calories = item.calories;
+                            obj.event_time = Date.now()
+
+                            user.user_events.push(obj);
+
                             user.save();
 
                             return res.json({

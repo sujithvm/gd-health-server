@@ -5,7 +5,7 @@ var User = mongoose.model('User');
 
 
 router.get('/:token', function(req, res) {
-    User.findOne({'token': req.params.token}).populate('items').exec(function(err, user){
+    User.findOne({'token': req.params.token}, function(err, user){
         if (err) {
             return res.json({
                 err : true,
@@ -18,11 +18,11 @@ router.get('/:token', function(req, res) {
                 response : user
             })
         }
-    })
+    });
 });
 
 router.get('/', function(req, res) {
-    User.find().populate('items').exec(function(err, users){
+    User.find(function(err, users){
         if (err) {
             return res.json({
                 err : true,
@@ -35,7 +35,7 @@ router.get('/', function(req, res) {
                 response : users
             })
         }
-    })
+    });
 });
 
 module.exports = router;

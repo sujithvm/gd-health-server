@@ -11,7 +11,13 @@ var UserSchema = new mongoose.Schema({
     gd_token : String,
     total_calories: { type: Number, default: 0 },
     salad_fruit_count: { type: Number, default: 0 },
-    items : [{type: Schema.Types.ObjectId, ref: 'Item'}]
+    user_events : [
+        {
+            event_type: String,
+            event_calories: { type: Number, default: 0 },
+            event_time : Date
+        }
+    ]
 });
 
 mongoose.model('User', UserSchema);
