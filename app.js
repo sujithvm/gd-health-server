@@ -12,8 +12,9 @@ try {
     throw new Error("Could not connect to database");
 }
 
-require('./models/UserSchema');
 require('./models/ItemSchema');
+require('./models/UserSchema');
+
 
 
 var index = require('./routes/index');
@@ -38,6 +39,9 @@ app.use('/users', users);
 
 app.use('/signup',  require('./routes/signup'));
 app.use('/items',  require('./routes/items'));
+app.use('/record',  require('./routes/record'));
+app.use('/salad_leaderboard',  require('./routes/salad_leaderboard'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

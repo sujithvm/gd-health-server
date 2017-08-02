@@ -20,7 +20,10 @@ router.post('/', function (req, res) {
                 var newItem = new Item(req.body);
                 newItem.id = new mongoose.Types.ObjectId;
                 newItem.save();
-                return res.json({
+
+                console.log(newItem);
+
+                res.json({
                     err: false,
                     mesage: 'Item created.'
                 });
@@ -45,12 +48,12 @@ router.post('/', function (req, res) {
 router.get('/:id', function(req, res) {
     Item.findOne({item_id: req.params.id}, function (err, item) {
         if (err) {
-            res.json({
+            return res.json({
                 err : true,
                 message : "Error finding specified item " + req.params.item_id + " ."
             })
         } else {
-            res.json({
+            return res.json({
                 err : false,
                 message : "Item found",
                 response : item
@@ -62,12 +65,12 @@ router.get('/:id', function(req, res) {
 router.get('/', function(req, res) {
     Item.find(function(err, items){
         if (err) {
-            res.json({
+            return res.json({
                 err : true,
                 message : "Error finding all items"
             })
         } else {
-            res.json({
+            return res.json({
                 err : false,
                 message : "All items found",
                 response : items
